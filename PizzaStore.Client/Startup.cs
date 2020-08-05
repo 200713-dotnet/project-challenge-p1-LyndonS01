@@ -29,7 +29,6 @@ namespace PizzaStore.Client
             services.AddControllersWithViews();
             services.AddDbContext<PizzaStoreDbContext>(options =>
             {
-              // options.UseSqlServer("server=revbc1.database.windows.net;database=PsDbMVC;user id=sqladmin;password=Fined00!");
               options.UseSqlServer(Configuration.GetConnectionString("mssql")); //recommended
               // options.UseSqlServer(Configuration["dataconnect:mssql"]); //all other configurations
             });
