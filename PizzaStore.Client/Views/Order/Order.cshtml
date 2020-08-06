@@ -6,15 +6,29 @@ XSS = cross-site scripting
 CSRF* = cross-site request forgery *@
 
 @* HTML WAY *@
+<h2>Choose your crust:</h2>
 <form action="/order" method="post">
   @foreach (var crust in @Model.Crusts)
   {
     <input type="radio" name="crust" id="crust" value="@crust.Name" data-val="true" data-val-required="Needed">
     <label for="crust">@crust.Name</label>
-    @Html.ValidationMessageFor(m => m.Crust)
-    <br />
   }
+<br />
+@Html.ValidationMessageFor(m => m.Crust, null, new { @class = "text-danger" })
+<br />
+<h2>Choose your size:</h2>
+  @foreach (var size in @Model.Sizes)
+   {
+    <input type="radio" name="size" id="size" value="@size.Name" data-val="true" data-val-required="Needed">
+    <label for="size">@size.Name</label>
+  }
+<br />
+@Html.ValidationMessageFor(m => m.Size, null, new { @class = "text-danger" })
+<br />
 
+@*
+<h2>Choose your size:</h2>
+<br />
   <select name="size" id="">
     @foreach (var size in @Model.Sizes)
     {
@@ -22,18 +36,19 @@ CSRF* = cross-site request forgery *@
     }
   </select>
   @Html.ValidationMessageFor(m => m.Size)
-  <br />
-
+  <br /><br />
+*@
+<h2>Choose your toppings:</h2>
   @foreach (var topping in @Model.Toppings)
   {
     <input type="checkbox" name="selectedtoppings" id="selectedtoppings" value="@topping.Name">
     <label for="selectedtoppings">@topping.Name</label>
-    @Html.ValidationMessageFor(m => m.SelectedToppings)
-    <br />
   }
-
-  <input type="submit" value="place order">
-  <button type="submit">place order</button>
+<br />
+@Html.ValidationMessageFor(m => m.SelectedToppings, null, new { @class = "text-danger" })
+<br />
+  @* <input type="submit" value="place order"> *@
+  <button type="submit">Add to Cart</button>
   <br />
 </form>
 
@@ -64,20 +79,27 @@ CSRF* = cross-site request forgery *@
 
 @* TAG HELPER WAY *@
 @*
-<form asp-action="" method="post">
+<h2>Choose your crust:</h2>
+<br />
+
+<form asp-controller="order" asp-action="" method="post">
   @foreach (var crust in @Model.Crusts)
   {
     <input type="radio" asp-for="@Model.Crust" value="@crust.Name">
+    <label asp-for="@Model.Crust">@crust.Name</label>
+    @Html.ValidationMessageFor(m => m.Crust)
     <br />
   }
 
-  <select asp-for="@Model.Size">
+  <select asp-for="@Model.Sizes">
+
     @foreach (var size in @Model.Sizes)
     {
-      <option value="@size.Name">@size.Name</option>
-      <br />
+      <option value="@size.Name">"@size.Name"</option>
     }
   </select>
+  @Html.ValidationMessageFor(m => m.Size)
+  <br />
 
   <button type="submit">place order</button>
 </form>

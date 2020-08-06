@@ -9,7 +9,7 @@ using PizzaStore.Storing;
 
 namespace PizzaStore.Client.Controllers
 {
-  [Route("/order")]
+  [Route("/order/{id=1}")]
   // [EnableCors("private")]  
   public class OrderController : Controller
   {
@@ -22,14 +22,23 @@ namespace PizzaStore.Client.Controllers
 
     // [Route("/home")]
     [HttpGet]
-    public IActionResult Home()
+    public IActionResult Get(int id)
     {
+      switch (id)
+      {
+        case 1:           // display available preset pizzas 
+          break;
+        case 2:           // display options for a custom pizza
+          break;
+        default:
+          break;
+      };
       return View("Order", new PizzaViewModel());
     }
 
     [HttpPost]
     // [ValidateAntiForgeryToken]
-    public IActionResult PlaceOrder(PizzaViewModel pizzaViewModel) //model binding
+    public IActionResult Post(PizzaViewModel pizzaViewModel) //model binding
     {
       if (ModelState.IsValid) //  what is the validation? (add to viewmodel)
       {

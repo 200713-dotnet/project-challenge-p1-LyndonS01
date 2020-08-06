@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using PizzaStore.Domain.Factories;
@@ -19,10 +20,15 @@ namespace PizzaStore.Client.Models
     public string Crust { get; set; }
     [Required(ErrorMessage = "A size is required")]
     public string Size { get; set; }
-    [MinLength(2, ErrorMessage = "A minimum of 2 toppings are required")]
-    [MaxLength(5, ErrorMessage = "There is a limit of 5 toppings")]
+    [DisplayName("Toppings")]
+    [Required(ErrorMessage="{0} is required.")]
+    [MinLength(_min_toppings, ErrorMessage = "A minimum of {1} topping(s) is required")]
+    [MaxLength(_max_toppings, ErrorMessage = "There is a limit of {1} toppings")]
     public List<string> SelectedToppings { get; set; }
     // public bool SelectedTopping { get; set; }
+
+    public const int _min_toppings = 2;
+    public const int _max_toppings = 5;
 
     public PizzaViewModel()
     {
