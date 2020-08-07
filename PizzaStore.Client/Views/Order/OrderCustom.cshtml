@@ -6,8 +6,9 @@ XSS = cross-site scripting
 CSRF* = cross-site request forgery *@
 
 @* HTML WAY *@
+
 <h2>Choose your crust:</h2>
-<form action="/order" method="post">
+<form action="/order/2" method="post">
   @foreach (var crust in @Model.Crusts)
   {
     <input type="radio" name="crust" id="crust" value="@crust.Name" data-val="true" data-val-required="Needed">

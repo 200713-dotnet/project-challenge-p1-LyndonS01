@@ -20,26 +20,42 @@ namespace PizzaStore.Client.Controllers
       _db = dbContext;
     }
 
-    // [Route("/home")]
     [HttpGet]
     public IActionResult Get(int id)
     {
+      var return_view = "";
+
       switch (id)
       {
         case 1:           // display available preset pizzas 
+          return_view = "OrderStandard";
           break;
         case 2:           // display options for a custom pizza
+          return_view = "OrderCustom";
           break;
         default:
           break;
       };
-      return View("Order", new PizzaViewModel());
+      return View(return_view, new PizzaViewModel());
     }
 
     [HttpPost]
     // [ValidateAntiForgeryToken]
-    public IActionResult Post(PizzaViewModel pizzaViewModel) //model binding
+    public IActionResult Post(PizzaViewModel pizzaViewModel, int id) //model binding
     {
+      var return_view = "";
+      switch (id)
+      {
+        case 1:           // display available preset pizzas 
+          return_view = "OrderStandard";
+          break;
+        case 2:           // display options for a custom pizza
+          return_view = "OrderCustom";
+          break;
+        default:
+          break;
+      };
+
       if (ModelState.IsValid) //  what is the validation? (add to viewmodel)
       {
         var p = new PizzaFactory(); // use dependency injection
@@ -51,7 +67,8 @@ namespace PizzaStore.Client.Controllers
         return Redirect("/user/index");   // http 300-series status
       }
 
-      return View("Order", pizzaViewModel);
+
+      return View(return_view, pizzaViewModel);
     }
   }
 }

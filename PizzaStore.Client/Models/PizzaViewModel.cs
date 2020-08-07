@@ -9,13 +9,19 @@ namespace PizzaStore.Client.Models
 {
   public class PizzaViewModel
   {
+    public const int _min_toppings = 2;
+    public const int _max_toppings = 5;
+
     // out to the client
     public List<CrustModel> Crusts { get; set; }
     public List<SizeModel> Sizes { get; set; }
     public List<ToppingModel> Toppings { get; set; }
-
+    public List<string> Types { get; set; }
+    public Dictionary<string, decimal> Prices { get; set; }
 
     // in from the client
+    [Required(ErrorMessage = "A type is required")]
+    public string Type { get; set; }
     [Required(ErrorMessage = "A crust is required")]
     public string Crust { get; set; }
     [Required(ErrorMessage = "A size is required")]
@@ -27,30 +33,49 @@ namespace PizzaStore.Client.Models
     public List<string> SelectedToppings { get; set; }
     // public bool SelectedTopping { get; set; }
 
-    public const int _min_toppings = 2;
-    public const int _max_toppings = 5;
-
     public PizzaViewModel()
     {
-      Crusts = new List<CrustModel>();
-      Crusts.Add(new CrustModel{Name = "Thin"});
-      Crusts.Add(new CrustModel{Name = "Thick"});
-      Crusts.Add(new CrustModel{Name = "Stuffed"});
+      Crusts = new List<CrustModel>()
+        {
+          new CrustModel{Name = "Thin"},
+          new CrustModel{Name = "Thick"},
+          new CrustModel{Name = "Stuffed"}
+        };
 
-      Sizes = new List<SizeModel>();
-      Sizes.Add(new SizeModel{Name = "Regular"});
-      Sizes.Add(new SizeModel{Name = "Large"});
-      Sizes.Add(new SizeModel{Name = "Family"});
+      Sizes = new List<SizeModel>()
+        {
+          new SizeModel{Name = "Regular"},
+          new SizeModel{Name = "Large"},
+          new SizeModel{Name = "Family"}
+        };
 
-      Toppings = new List<ToppingModel>();
-      Toppings.Add(new ToppingModel{Name = "cheese"});
-      Toppings.Add(new ToppingModel{Name = "extra cheese"});
-      Toppings.Add(new ToppingModel{Name = "pepperoni"});
-      Toppings.Add(new ToppingModel{Name = "ham"});
-      Toppings.Add(new ToppingModel{Name = "pineapple"});
-      Toppings.Add(new ToppingModel{Name = "mushrooms"});
-      Toppings.Add(new ToppingModel{Name = "bell peppers"});
-      Toppings.Add(new ToppingModel{Name = "sausage"});
+      Toppings = new List<ToppingModel>()
+        {
+          new ToppingModel{Name = "cheese"},
+          new ToppingModel{Name = "extra cheese"},
+          new ToppingModel{Name = "pepperoni"},
+          new ToppingModel{Name = "ham"},
+          new ToppingModel{Name = "pineapple"},
+          new ToppingModel{Name = "mushrooms"},
+          new ToppingModel{Name = "bell peppers"},
+          new ToppingModel{Name = "sausage"}                
+        };
+      
+      Types = new List<string>
+        {
+          "Cheese",
+          "Pepperoni",
+          "Hawaiian"
+        };
+
+      // Type = "Custom";  //default value for View Model  
+
+      Prices = new Dictionary<string, decimal>
+        {
+          {"Cheese", 8.0m},
+          {"Pepperoni", 8.5m},
+          {"Hawaiian", 8.5m}
+        };
     }
   }
 }

@@ -1,15 +1,15 @@
 {
 	"folders": [
-    {
-      "path": "../../../project-challenges/project-challenge-p1-LyndonS01"
-    },
-    {
-      "path": ".."
-    },
-    {
-      "path": "../../../200713_dotnet/week_3"
-    }
-  ],
+		{
+			"path": "."
+		},
+		{
+			"path": "../../200713_dotnet/week_3/PizzaStore"
+		},
+		{
+			"path": "../project-challenge-p0-LyndonS01/PizzaStore"
+		}
+	],
   "remoteAuthority": "wsl+Ubuntu",
   "settings": {}
 }
