@@ -11,16 +11,6 @@ namespace PizzaStore.Domain.Models
 
     public decimal Price { get; set; }
 
-    //   public PizzaModel(string name, CrustModel crust, SizeModel size, List<ToppingModel> toppings)
-    //   {
-    //     var baseprice = 8.0m;
-    //     var pricepertopping = 1.0m;
-    //     Name = name;
-    //     Crust = crust;
-    //     Size = size;
-    //     Price = baseprice + pricepertopping*toppings.Count();
-    //   }
-    // }
   }
 
 }

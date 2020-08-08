@@ -11,16 +11,18 @@ namespace PizzaStore.Client.Models
   {
     public const int _min_toppings = 2;
     public const int _max_toppings = 5;
+    public decimal Price { get; set; }
+    public Dictionary<string, List<string>> ToppingSets { get; }
 
     // out to the client
     public List<CrustModel> Crusts { get; set; }
     public List<SizeModel> Sizes { get; set; }
     public List<ToppingModel> Toppings { get; set; }
     public List<string> Types { get; set; }
-    public Dictionary<string, decimal> Prices { get; set; }
+    public Dictionary<string, decimal> Prices { get; }
 
     // in from the client
-    [Required(ErrorMessage = "A type is required")]
+    // [Required(ErrorMessage = "A type is required")]
     public string Type { get; set; }
     [Required(ErrorMessage = "A crust is required")]
     public string Crust { get; set; }
@@ -68,13 +70,22 @@ namespace PizzaStore.Client.Models
           "Hawaiian"
         };
 
+      SelectedToppings = new List<string> {"dummy", "dummy"};    // initialize dummy value for validation purposes
+
+      ToppingSets = new Dictionary<string, List<string>>
+      {
+        {"Cheese", new List<string>{"cheese", "extra cheese"}},
+        {"Pepperoni", new List<string>{"cheese", "pepperoni"}},
+        {"Hawaiian", new List<string>{"cheese", "ham", "pineapple"}}
+      };
+
       // Type = "Custom";  //default value for View Model  
 
       Prices = new Dictionary<string, decimal>
         {
           {"Cheese", 8.0m},
           {"Pepperoni", 8.5m},
-          {"Hawaiian", 8.5m}
+          {"Hawaiian", 9.0m}
         };
     }
   }

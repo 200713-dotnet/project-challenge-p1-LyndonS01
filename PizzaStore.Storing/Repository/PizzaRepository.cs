@@ -18,12 +18,20 @@ namespace PizzaStore.Storing.Repository
 
       newPizza.Crust = new domain.CrustModel();
       newPizza.Size = new domain.SizeModel();
+      newPizza.Toppings = new List<domain.ToppingModel>();
 
       newPizza.Crust.Name = pizza.Crust.Name;
       newPizza.Size.Name = pizza.Size.Name;
       newPizza.Name = pizza.Name;
       newPizza.Price = pizza.Price;
 
+      foreach (var t in pizza.Toppings)
+      {
+        List<ToppingModel> newToppings = new List<ToppingModel>();
+        ToppingModel newTopping = new ToppingModel();
+        newTopping.Name = t.Name;
+        newPizza.Toppings.Add(newTopping);
+      }
       _db.Pizzas.Add(newPizza);
       _db.SaveChanges();
     }

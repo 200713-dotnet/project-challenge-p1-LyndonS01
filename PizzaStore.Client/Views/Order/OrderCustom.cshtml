@@ -6,7 +6,12 @@ XSS = cross-site scripting
 CSRF* = cross-site request forgery *@
 
 @* HTML WAY *@
-
+  <select name="type" id="type" hidden=true>
+    @foreach (var type in @Model.Types)
+    {
+      <option value=@type>@type</option>
+    }
+  </select>
 <h2>Choose your crust:</h2>
 <form action="/order/2" method="post">
   @foreach (var crust in @Model.Crusts)
