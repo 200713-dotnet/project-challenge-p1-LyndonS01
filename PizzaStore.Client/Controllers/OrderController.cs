@@ -6,6 +6,7 @@ using PizzaStore.Client.Models;
 using PizzaStore.Domain.Factories;
 using PizzaStore.Domain.Models;
 using PizzaStore.Storing;
+using PizzaStore.Storing.Repository;
 
 namespace PizzaStore.Client.Controllers
 {
@@ -59,8 +60,11 @@ namespace PizzaStore.Client.Controllers
       if (ModelState.IsValid) //  what is the validation? (add to viewmodel)
       {
         var p = new PizzaFactory(); // use dependency injection
-        
-        //p.Create(pizzaViewModel);
+        PizzaModel domainPizzaModel = new PizzaModel();
+        domainPizzaModel = p.Create();           // factory-created Domain PizzaModel
+                                                  // bind PizzaViewModel to Domain PizzaModel
+        var repository = new PizzaRepository();
+        repository.Create(domainPizzaModel, _db);
         //repository.Create(pizzaViewModel);
 
         // return View("User");
