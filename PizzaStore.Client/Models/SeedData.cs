@@ -18,7 +18,7 @@ namespace PizzaStore.Client.Models
           serviceProvider.GetRequiredService<
               DbContextOptions<PizzaStoreDbContext>>()))
       {
-        // Look for any movies.
+        // Look for any crusts.
         if (!context.Crusts.Any())
         {
           context.Crusts.AddRange(

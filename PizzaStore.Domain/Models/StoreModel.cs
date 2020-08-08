@@ -1,6 +1,6 @@
 namespace PizzaStore.Domain.Models
 {
-  public class SpecialityPizza : PizzaModel
+  public class StoreModel : AModel
   {
     
   }
