@@ -1,0 +1,40 @@
+@model PizzaStore.Client.Models.StoreViewModel
+
+<form action="/store" method="get">
+<h1>PizzaWorld Store Reports<br/><small>Sales History for the Current Month</small></h1>
+		<hr>
+		
+		<table class="table table-bordered table-responsive table-hover">
+			<thead>
+				<tr align="center">
+					<td><b>Pizza Type</b></td>
+					<td><b>Size</b></td>
+					<td><b>Crust</b></td>
+					<td><b>Price</b></td>
+				</tr>
+			</thead><br/>
+			<tbody>
+        @foreach (var p in @Model.Pizzas)
+        {
+          <tr>
+					<td value="@p.Name">@p.Name</td>
+					<td value="@p.Size.Name">@p.Size.Name</td>
+					<td value="@p.Crust.Name">@p.Crust.Name</td>
+					<td value="@p.Price" align="right">@p.Price</td>
+					</tr>
+        }
+			</tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Total Qty. = @Model.Qty</td>
+          <td value="@Model.Price" type="CURRENCY">Total Qty. = $@Model.Price</td>
+        </tr>
+      </tfoot>
+		</table>
+  <br/>
+  <button type="submit">< Back</button>
+  <br />
+</form>
+

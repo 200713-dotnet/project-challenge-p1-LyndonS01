@@ -123,9 +123,7 @@ namespace PizzaStore.Client.Controllers
 
         var repo_pizza = new PizzaRepository();
         repo_pizza.Create(domainPizzaModel, _db);
-        //repository.Create(pizzaViewModel);
 
-        // return View("/Home/Index");
         return Redirect("/home/index");   // http 300-series status
       }
 

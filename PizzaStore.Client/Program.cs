@@ -12,19 +12,19 @@ namespace PizzaStore.Client
         {
             var host = CreateHostBuilder(args).Build();
 
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    SeedData.Initialize(services);
-                }
-                catch (Exception ex)
-                {
-                  System.Console.WriteLine("An error occurred seeding the DB.");
-                  System.Console.WriteLine(ex);
-                }
-            }
+            // using (var scope = host.Services.CreateScope())
+            // {
+            //     var services = scope.ServiceProvider;
+            //     try
+            //     {
+            //         SeedData.Initialize(services);
+            //     }
+            //     catch (Exception ex)
+            //     {
+            //       System.Console.WriteLine("An error occurred seeding the DB.");
+            //       System.Console.WriteLine(ex);
+            //     }
+            // }
 
             host.Run();
         }
