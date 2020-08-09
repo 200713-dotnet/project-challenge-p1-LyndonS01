@@ -51,29 +51,14 @@ namespace PizzaStore.Storing.Repository
       var query = _db.Pizzas.Include(t => t.Crust).Include(t => t.Size);
 
       foreach (var item in query.ToList())
-      {
-        var newP = new domain.PizzaModel();
-        var newC = new domain.CrustModel();
-        newC.Name = item.Crust.Name;
-        var newS = new domain.SizeModel();
-        newS.Name = item.Size.Name;
-
-        newP.Name = item.Name;
-        newP.Price = item.Price;
-        newP.Crust = newC;
-        newP.Size = newS;
-        domainPizzaList.Add(newP);
-      }
-        
-        // domainPizzaList.Add(new domain.PizzaModel()
-        // {
-        //   Name = item.Name,
-        //   new domain.CrustModel(){Name = item.Crusts.Name},
-        //   new domain.SizeModel(){Name = item.Sizes.Name},
-        //   // Size = item.Size.Name,
-        //   Price = item.Price
-        // }
-        // );
+        domainPizzaList.Add(new domain.PizzaModel()
+        {
+          Name = item.Name,
+          Crust = new domain.CrustModel() { Name = item.Crust.Name },
+          Size = new domain.SizeModel() { Name = item.Size.Name },
+          Price = item.Price
+          //          Toppings = new List<domain.Toppings>()
+        });
 
       return domainPizzaList;
     }

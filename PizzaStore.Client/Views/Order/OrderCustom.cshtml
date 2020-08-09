@@ -1,11 +1,5 @@
 @model PizzaStore.Client.Models.PizzaViewModel
 
-@* security measures
-CORS = cross-origin resource sharing
-XSS = cross-site scripting
-CSRF* = cross-site request forgery *@
-
-@* HTML WAY *@
   <select name="type" id="type" hidden=true>
     @foreach (var type in @Model.Types)
     {
@@ -32,18 +26,6 @@ CSRF* = cross-site request forgery *@
 @Html.ValidationMessageFor(m => m.Size, null, new { @class = "text-danger" })
 <br />
 
-@*
-<h2>Choose your size:</h2>
-<br />
-  <select name="size" id="">
-    @foreach (var size in @Model.Sizes)
-    {
-      <option value="@size.Name">@size.Name</option>
-    }
-  </select>
-  @Html.ValidationMessageFor(m => m.Size)
-  <br /><br />
-*@
 <h2>Choose your toppings:</h2>
   @foreach (var topping in @Model.Toppings)
   {
@@ -53,60 +35,6 @@ CSRF* = cross-site request forgery *@
 <br />
 @Html.ValidationMessageFor(m => m.SelectedToppings, null, new { @class = "text-danger" })
 <br />
-  @* <input type="submit" value="place order"> *@
   <button type="submit">Add to Cart</button>
   <br />
 </form>
-
-
-@* HTML HELPER WAY *@
-@*
-@using(Html.BeginForm("PlaceOrder", "Order", null, FormMethod.Post))
-{
-  @Html.AntiForgeryToken();
-  foreach (var crust in Model.Crusts)
-  {
-    @Html.RadioButtonFor(m => m.Crust, crust.Name);
-    @Html.LabelFor(m => m.Crust);
-    @Html.ValidationMessageFor(m => m.Crust)
-  }
-
-  @Html.DropDownListFor(m => m.Size, new SelectList(Model.Sizes));
-
-
-  foreach (var topping in Model.Toppings)
-  {
-    @Html.CheckBoxFor(m => m.SelectedTopping, new { name = "SelectedToppings", value = topping });
-  }
-  
-  <button type="submit">place order</button>
-}
-*@
-
-@* TAG HELPER WAY *@
-@*
-<h2>Choose your crust:</h2>
-<br />
-
-<form asp-controller="order" asp-action="" method="post">
-  @foreach (var crust in @Model.Crusts)
-  {
-    <input type="radio" asp-for="@Model.Crust" value="@crust.Name">
-    <label asp-for="@Model.Crust">@crust.Name</label>
-    @Html.ValidationMessageFor(m => m.Crust)
-    <br />
-  }
-
-  <select asp-for="@Model.Sizes">
-
-    @foreach (var size in @Model.Sizes)
-    {
-      <option value="@size.Name">"@size.Name"</option>
-    }
-  </select>
-  @Html.ValidationMessageFor(m => m.Size)
-  <br />
-
-  <button type="submit">place order</button>
-</form>
-*@
