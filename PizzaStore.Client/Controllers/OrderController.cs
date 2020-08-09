@@ -78,8 +78,8 @@ namespace PizzaStore.Client.Controllers
               if (pizzaViewModel.SelectedToppings.Contains("dummy"))
                 return View(return_view, pizzaViewModel);                   // no toppings were chosen at all, return to custom pizza order page  
               break;
-            default:  
-              break;  
+            default:
+              break;
           }
 
           var pricepertopping = 1.0m;
@@ -90,7 +90,7 @@ namespace PizzaStore.Client.Controllers
               break;
             case 2:           // set prices for custom pizza orders
               domainPizzaModel.Price = pizzaViewModel.Prices["Cheese"]; //cheapest
-              domainPizzaModel.Price += pizzaViewModel.SelectedToppings.Count*pricepertopping;
+              domainPizzaModel.Price += pizzaViewModel.SelectedToppings.Count * pricepertopping;
               break;
             default:
               break;
@@ -124,7 +124,9 @@ namespace PizzaStore.Client.Controllers
         var repo_pizza = new PizzaRepository();
         repo_pizza.Create(domainPizzaModel, _db);
 
-        return Redirect("/home/index");   // http 300-series status
+        return_view = "ThankYou";
+        return View(return_view);
+        // return Redirect("/home/index");   // http 300-series status
       }
 
 
