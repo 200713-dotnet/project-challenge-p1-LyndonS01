@@ -126,7 +126,7 @@ namespace PizzaStore.Client.Controllers
 
         return_view = "ThankYou";
         return View(return_view);
-        // return Redirect("/home/index");   // http 300-series status
+
       }
 
 
