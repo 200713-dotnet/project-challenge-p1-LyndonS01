@@ -44,8 +44,6 @@ namespace PizzaStore.Client.Controllers
     }
 
     [HttpPost]
-    // [ValidateAntiForgeryToken]
-    // public IActionResult Post(StoreViewModel pizzaViewModel, int id)
     public IActionResult Post(int id)
     {
       var return_view = "index";
@@ -62,12 +60,21 @@ namespace PizzaStore.Client.Controllers
         var price = 0.0m;
         var qty = 0;
 
-        foreach (var item in pizzaList.ToList())
+        storepizzalist.Pizzas = pizzaList;
+        storepizzalist.Toppings = new List<string>();
+        foreach(var p in pizzaList.ToList())
         {
-          price += item.Price;
+          List<string> toppings = new List<string>();
+          foreach(var s in p.Toppings.ToList())
+          {
+            toppings.Add(s.Name);
+          }
+          storepizzalist.Toppings.Add(string.Join(",", toppings.ToArray()));
+
+          price += p.Price;
           qty += 1;
         }
-        storepizzalist.Pizzas = pizzaList;
+
         storepizzalist.Qty = qty;
         storepizzalist.Price = price;
         

@@ -11,9 +11,9 @@ namespace PizzaStore.Client.Models
     public List<PizzaModel> Pizzas { get; set; }        // use Pizza Models instead of Order Models for now
     public int Qty { get; set; }
     public decimal Price { get; set; }
+    public List<string> Toppings { get; set; }
 
     // in from the client
-
     public StoreViewModel() {}
   }
 }

@@ -9,7 +9,6 @@ namespace PizzaStore.Storing.Repository
 {
   public class PizzaRepository
   {
-    // private PizzaStoreDbContext _db = new PizzaStoreDbContext();
 
     public void Create(PizzaModel pizza, PizzaStoreDbContext _db)
     {
@@ -36,29 +35,28 @@ namespace PizzaStore.Storing.Repository
       _db.SaveChanges();
     }
 
-    // public void CreateOrderDb(domain.Order order)
-    // {
-    //   var newOrder = new Orders();
-
-    //   _db.Orders.Add(newOrder);
-    //   _db.SaveChanges();
-    // }
-
     public List<domain.PizzaModel> ReadAll(PizzaStoreDbContext _db)
     {
       // Bind Domain Storing to Domain PizzaModel
       var domainPizzaList = new List<domain.PizzaModel>();
-      var query = _db.Pizzas.Include(t => t.Crust).Include(t => t.Size);
+      var query = _db.Pizzas.Include(t => t.Crust).Include(t => t.Size).Include(t => t.Toppings);
 
       foreach (var item in query.ToList())
+      {
         domainPizzaList.Add(new domain.PizzaModel()
         {
           Name = item.Name,
           Crust = new domain.CrustModel() { Name = item.Crust.Name },
           Size = new domain.SizeModel() { Name = item.Size.Name },
-          Price = item.Price
-          //          Toppings = new List<domain.Toppings>()
+          Price = item.Price,
+          Toppings = new List<ToppingModel>()
         });
+        var toppings = item.Toppings.ToList();
+        foreach (var t in toppings)
+        {
+          domainPizzaList.LastOrDefault().Toppings.Add(new ToppingModel() {Name = t.Name});
+        }    
+      }
 
       return domainPizzaList;
     }
