@@ -22,7 +22,6 @@ namespace PizzaStore.Client.Models
     public Dictionary<string, decimal> Prices { get; }
 
     // in from the client
-    // [Required(ErrorMessage = "A type is required")]
     public string Type { get; set; }
     [Required(ErrorMessage = "A crust is required")]
     public string Crust { get; set; }
@@ -33,7 +32,6 @@ namespace PizzaStore.Client.Models
     [MinLength(_min_toppings, ErrorMessage = "A minimum of {1} topping(s) is required")]
     [MaxLength(_max_toppings, ErrorMessage = "There is a limit of {1} toppings")]
     public List<string> SelectedToppings { get; set; }
-    // public bool SelectedTopping { get; set; }
 
     public PizzaViewModel()
     {
