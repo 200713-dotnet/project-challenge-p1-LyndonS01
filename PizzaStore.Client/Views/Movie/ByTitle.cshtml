@@ -1,0 +1,12 @@
+@model PizzaStore.Client.Models.MovieViewModel
+
+<form action="/movie" method="post">
+<h2>Enter a complete or parts of a movie title that you want to search for:</h2>
+<label for="title">Title Search String: </label>
+<input type="text" id="title" name="title">
+@Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
+<br />
+  <button type="submit">Search for Movies</button>
+  <br />
+</form>
+

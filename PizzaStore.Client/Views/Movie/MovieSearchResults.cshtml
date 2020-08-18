@@ -1,0 +1,36 @@
+@model PizzaStore.Client.Models.MovieViewModel
+
+<form action="/movie" method="get">
+<h1>RevFlix: Movie Search by Title Results<br/></h1>
+		<hr>
+				<table class="table table-bordered table-responsive table-hover">
+			<thead>
+				<tr align="center">
+					<td><b>Title</b></td>
+					<td><b>Year Released</b></td>
+					<td><b>IMDB ID</b></td>
+  			</tr>
+			</thead><br/>
+			<tbody>
+        @foreach (var movie in @Model.MovieResults)
+        {
+          <tr>
+					<td value="@movie.title">@movie.title</td>
+          <td align="center" value="@movie.year">@movie.year</td>
+          <td align="center" value="@movie.imdb_id">@movie.imdb_id</td>
+					</tr>
+        }
+			</tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><b>No. of Results = @Model.Results</b></td>
+        </tr>
+      </tfoot>
+		</table>
+  <br/>
+  <button type="submit">< Back</button>
+  <br />
+</form>
+

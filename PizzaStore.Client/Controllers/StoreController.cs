@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using PizzaStore.Client.Models;
@@ -7,10 +9,12 @@ using PizzaStore.Domain.Factories;
 using PizzaStore.Domain.Models;
 using PizzaStore.Storing;
 using PizzaStore.Storing.Repository;
+using RestSharp;
 
 namespace PizzaStore.Client.Controllers
 {
   [Route("/store/{id=1}")]
+  // [Route("/store/")]
   // [EnableCors("private")]  
   public class StoreController : Controller
   {
@@ -35,6 +39,10 @@ namespace PizzaStore.Client.Controllers
           return_view = "StoreSales";
           return View(return_view, storepizzalist);
         case 3:          // display Store Order History
+          return View(return_view);
+        case 4:          // display Search Movies by Title
+          // GetMoviesByTitle();
+          // return_view = "SearchByTitle";
           return View(return_view);
         default:
           return View(return_view);
@@ -80,5 +88,25 @@ namespace PizzaStore.Client.Controllers
         
         return storepizzalist;
     }
+
+    // public void GetMoviesByTitle()
+    // {
+    //   var client = new RestClient("https://movies-tvshows-data-imdb.p.rapidapi.com/?title=indiana%20jones&type=get-movies-by-title");
+    //   var request = new RestRequest(Method.GET);
+    //   request.AddHeader("x-rapidapi-host", "movies-tvshows-data-imdb.p.rapidapi.com");
+    //   request.AddHeader("x-rapidapi-key", "971bf2ac6fmsh604c84512ded1eap16b86fjsn950b74fe77a7");
+    //   IRestResponse response = client.Execute(request); 
+
+    //   try
+    //   {
+    //     var movieList = JsonSerializer.Deserialize<MovieQByTitleModel>(response.Content);
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     Console.WriteLine(e);
+    //   }
+      
+    //   return;
+    // }
   }
 }
