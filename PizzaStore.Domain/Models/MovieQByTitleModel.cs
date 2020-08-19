@@ -2,13 +2,9 @@ using System.Collections.Generic;
 
 namespace PizzaStore.Domain.Models
 {
-  public class MovieQByTitleModel
+  public class MovieQByTitleModel : MovieQByTitleModelBase
   {
-    public List<MovieImdbModel> movie_results { get; set; }
-    public int search_results { get; set; }
-    public string status { get; set; }
-    public string status_message { get; set; }
-
+    public List<MovieImdbModel> Movie_Results { get; set; }
     public MovieQByTitleModel()
     {
 

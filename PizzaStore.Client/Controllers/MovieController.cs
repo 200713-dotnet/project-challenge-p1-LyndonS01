@@ -32,13 +32,12 @@ namespace PizzaStore.Client.Controllers
       {
         case 1:           // display Search Movies by Title page 
           return_view = "ByTitle";
-          return View(return_view, new PizzaStore.Client.Models.MovieViewModel());
-        case 2:          // display Store Sales History
+          return View(return_view, new MovieViewModel());
+        case 2:          
           return View(return_view);
-        case 3:          // display Store Order History
+        case 3:          
           return View(return_view);
-        case 4:          // display Search Movies by Title
-          // return_view = "SearchByTitle";
+        case 4:          
           return View(return_view);
         default:
           return View(return_view);
@@ -47,7 +46,7 @@ namespace PizzaStore.Client.Controllers
     }
 
     [HttpPost]
-    public IActionResult Post(PizzaStore.Client.Models.MovieViewModel movieViewModel, int id)
+    public IActionResult Post(MovieViewIntModel movieViewModel, int id)
     {
       var return_view = "index";
 
@@ -56,57 +55,29 @@ namespace PizzaStore.Client.Controllers
         case 1:           // display Search Movie by Title results
           return_view = "ByTitle";
           break;
-        case 2:          
+        case 2:
           break;
         default:
-        break;
+          break;
       }
-      
+
       if (ModelState.IsValid) //  what is the validation? (add to viewmodel)
       {
         return_view = "MovieSearchResults";
         var searchString = movieViewModel.Title;
         // return View(return_view, GetMoviesByTitle(searchString));
         var movies = new GetMoviesClient();
-        return View(return_view, movies.GetMovies(searchString));
+        return View(return_view, movies.GetMoviesImdb("by_title", searchString));
+        // return View(return_view, movies.GetMovies("imdb", "popular", null));
+        // return View(return_view, movies.GetMovies("imdb", "trending", null));
+        // return View(return_view, movies.GetMovies("imdb", "recently_added", null));
       }
       else
       {
         return View(return_view, movieViewModel);
       }
-      
-    }
-    // public MovieViewModel GetMoviesByTitle(string searchString)
-    // {
-    //   var url = "https://movies-tvshows-data-imdb.p.rapidapi.com/?title=" + searchString.Replace(" ", "%20") + "&type=get-movies-by-title";
-    //   var client = new RestClient(url);
-    //   var request = new RestRequest(Method.GET);
-    //   request.AddHeader("x-rapidapi-host", "movies-tvshows-data-imdb.p.rapidapi.com");
-    //   request.AddHeader("x-rapidapi-key", "971bf2ac6fmsh604c84512ded1eap16b86fjsn950b74fe77a7");
-    //   IRestResponse response = client.Execute(request); 
 
-    //   try
-    //   {
-    //     MovieQByTitleModel mvList = new MovieQByTitleModel();
-    //     mvList = JsonSerializer.Deserialize<MovieQByTitleModel>(response.Content);
-        
-    //     //map movie search results here
-    //     var mvListM = new MovieViewModel();
-    //     var mvListR = new List<MovieImdbModel>();
-    //     mvListM.MovieResults = mvListR;
-
-    //     foreach (var m in mvList.movie_results.ToList())
-    //     {
-    //       mvListM.MovieResults.Add(new MovieImdbModel() {title = m.title, year = m.year, imdb_id = m.imdb_id});
-    //     }
-    //     mvListM.Results = mvList.search_results.ToString();
-    //     return mvListM;
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     Console.WriteLine(e);
-    //   }
-    //   return new MovieViewModel();
     }
   }
+}
 

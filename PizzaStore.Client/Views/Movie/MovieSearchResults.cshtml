@@ -1,4 +1,4 @@
-@model PizzaStore.Client.Models.MovieViewModel
+@model PizzaStore.Client.Models.MovieViewIntModel
 
 <form action="/movie" method="get">
 <h1>RevFlix: Movie Search by Title Results<br/></h1>
@@ -15,9 +15,9 @@
         @foreach (var movie in @Model.MovieResults)
         {
           <tr>
-					<td value="@movie.title">@movie.title</td>
-          <td align="center" value="@movie.year">@movie.year</td>
-          <td align="center" value="@movie.imdb_id">@movie.imdb_id</td>
+					<td value="@movie.Title">@movie.Title</td>
+          <td align="center" value="@movie.Year">@movie.Year</td>
+          <td align="center" value="@movie.Imdb_id">@movie.Imdb_id</td>
 					</tr>
         }
 			</tbody>
